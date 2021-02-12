@@ -540,10 +540,12 @@ int fish_wcswidth(const wchar_t *str) { return fish_wcswidth(str, std::wcslen(st
 /// See fallback.h for the normal definitions.
 int fish_wcswidth(const wcstring &str) { return fish_wcswidth(str.c_str(), str.size()); }
 
+#if !defined(__Haiku__)
 locale_t fish_c_locale() {
     static const locale_t loc = newlocale(LC_ALL_MASK, "C", nullptr);
     return loc;
 }
+#endif
 
 /// Like fish_wcstol(), but fails on a value outside the range of an int.
 ///
@@ -682,6 +684,7 @@ unsigned long long fish_wcstoull(const wchar_t *str, const wchar_t **endptr, int
 /// Like wcstod(), but wcstod() is enormously expensive on some platforms so this tries to have a
 /// fast path.
 double fish_wcstod(const wchar_t *str, wchar_t **endptr) {
+#ifndef __Haiku__
     // The "fast path." If we're all ASCII and we fit inline, use strtod().
     char narrow[128];
     size_t len = std::wcslen(str);
@@ -700,6 +703,9 @@ double fish_wcstod(const wchar_t *str, wchar_t **endptr) {
         return ret;
     }
     return wcstod_l(str, endptr, fish_c_locale());
+#else
+    return wcstod(str, endptr);
+#endif
 }
 
 file_id_t file_id_t::from_stat(const struct stat &buf) {

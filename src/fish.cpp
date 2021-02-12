@@ -92,7 +92,7 @@ static long long tv_to_msec(const struct timeval &tv) {
 }
 
 static void print_rusage_self(FILE *fp) {
-#ifndef HAVE_GETRUSAGE
+#if !defined(HAVE_GETRUSAGE) || defined(__Haiku__)
     fprintf(fp, "getrusage() not supported on this platform");
     return;
 #else

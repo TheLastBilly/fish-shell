@@ -295,7 +295,7 @@ long double raw_string_to_scalar_type(const wchar_t *s, wchar_t **end) {
     // valid floating point value. It could also be due to the locale using different separator
     // characters than the normal english convention. So try again by forcing the use of a locale
     // that employs the english convention for writing floating point numbers.
-    return wcstod_l(s, end, fish_c_locale());
+    return wcstod(s, end);
 }
 
 template <typename T>
