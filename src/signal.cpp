@@ -369,7 +369,7 @@ void signal_set_handlers(bool interactive) {
     // Apply our SIGIO handler.
     act.sa_sigaction = &fish_signal_handler;
     act.sa_flags = SA_SIGINFO;
-    sigaction(SIGIO, &act, nullptr);
+    sigaction(SIGILL, &act, nullptr);
 
     // Whether or not we're interactive we want SIGCHLD to not interrupt restartable syscalls.
     act.sa_sigaction = &fish_signal_handler;

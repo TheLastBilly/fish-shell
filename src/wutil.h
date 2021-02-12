@@ -12,6 +12,8 @@
 
 #include <string>
 
+#include "locale.h"
+
 #ifdef HAVE_XLOCALE_H
 #include <xlocale.h>
 #endif

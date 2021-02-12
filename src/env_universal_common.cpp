@@ -1405,6 +1405,7 @@ class universal_notifier_sigio_t final : public universal_notifier_t {
     [[noreturn]] universal_notifier_sigio_t() {
         DIE("universal_notifier_sigio_t cannot be used on this system");
     }
+    [[noreturn]] universal_notifier_sigio_t(const wchar_t *test_path): universal_notifier_sigio_t() {}
 #endif
 };
 

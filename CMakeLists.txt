@@ -51,6 +51,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra \
 # Disable exception handling.
 add_compile_options(-fno-exceptions)
 
+add_definitions(-D__Haiku__)
+
 # Prefer lld or the gold linker because they don't emit useless warnings about sys_nerr and
 # _sys_errlist. They're also faster (significantly so in the case of lld).
 if (UNIX)
