@@ -143,7 +143,7 @@ bool is_potential_path(const wcstring &potential_path_fragment, const wcstring_l
     if (has_magic || clean_potential_path_fragment.empty()) {
         return result;
     }
-
+    
     // Don't test the same path multiple times, which can happen if the path is absolute and the
     // CDPATH contains multiple entries.
     std::set<wcstring> checked_paths;
@@ -163,10 +163,11 @@ bool is_potential_path(const wcstring &potential_path_fragment, const wcstring_l
         // If we end with a slash, then it must be a directory.
         bool must_be_full_dir = abs_path.at(abs_path.size() - 1) == L'/';
         if (must_be_full_dir) {
-            struct stat buf;
-            if (0 == wstat(abs_path, &buf) && S_ISDIR(buf.st_mode)) {
-                result = true;
-            }
+            result = true;
+//             struct stat buf;
+//             if (0 == wstat(abs_path, &buf) && S_ISDIR(buf.st_mode)) {
+//                 result = true;
+//             }
         } else {
             // We do not end with a slash; it does not have to be a directory.
             DIR *dir = NULL;
