@@ -363,7 +363,7 @@ int flock(int fd, int op) {
 
 #endif  // HAVE_FLOCK
 
-#if !defined(HAVE_WCSTOD_L) && !defined(__NetBSD__) && !defined(__Haiku__)
+#if !defined(HAVE_WCSTOD_L) && !defined(__NetBSD__) && !defined(__HAIKU__)
 #undef wcstod_l
 #include <locale.h>
 // For platforms without wcstod_l C extension, wrap wcstod after changing the
